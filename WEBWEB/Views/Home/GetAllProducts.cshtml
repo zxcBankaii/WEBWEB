@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Главная";
+}
+
+@model List<Product>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Наименование</th>
+            <th scope="col">Описание</th>
+            <th scope="col">IdCatigory</th>
+            <th scope="col">Цена</th>
+            <th scope="col">Изменить</th>
+            <th scope="col">Удалить</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int count = 0;
+        }
+        @foreach (var item in Model)
+        {
+            count++;
+            <tr>
+                <th scope="row">@count</th>
+                <td>@item.Name</td>
+                <td>@item.Description</td>
+                <td>@item.CategoryId</td>
+                <td>@item.Price</td>
+                <td><a asp-controller="Home" asp-action="UpdateProduct" asp-route-idProduct="@item.Id" type="button" class="btn btn-warning">Изменить</a></td>
+                <td><a asp-controller="Home" asp-action="RemoveProduct" asp-route-idProduct="@item.Id" type="button" class="btn btn-danger">Удалить</a></td>
+
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+
+
+<form asp-controller="Home" asp-action="CreateProduct" method="post">
+    <h1 class="mt-5">Создание нового продукта</h1>
+    <input type="text" name="name" class="form-control mt-2" placeholder="Наименование"  required="">
+    <input type="text" name="price" class="form-control mt-2" placeholder="Цена"  required="">
+    <input type="text" name="description" class="form-control mt-2" placeholder="Описание"  required="">
+    <input type="text" name="idCatygory" class="form-control mt-2" placeholder="Id Категория"  required="">
+    <button class="w-100 btn btn-primary btn-lg mt-2" type="submit">Создать</button>
+</form>

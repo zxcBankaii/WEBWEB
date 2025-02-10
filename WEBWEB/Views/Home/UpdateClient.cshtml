@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "Главная";
+}
+
+@model User 
+
+
+
+<form asp-controller="Home" asp-action="UpdateClient" method="post">
+    <h1 class="mt-5">Изменение клиента</h1>
+    <input type="text" name="firstName" class="form-control mt-2" placeholder="Имя" value="@Model.FirstName" required="">
+    <input type="text" name="id" class="form-control mt-2" placeholder="Имя" value="@Model.Id" required="" hidden>
+    <input type="text" name="lastName" class="form-control mt-2" placeholder="Отчество" value="@Model.LastName" required="">
+    <input type="text" name="email" class="form-control mt-2" placeholder="Email" value="@Model.Email" required="">
+    <input type="text" name="password" class="form-control mt-2" placeholder="Пароль" value="@Model.PasswordHash" required="">
+    <input type="text" name="adress" class="form-control mt-2" placeholder="Адрес" value="@Model.Address" required="">
+    <button class="w-100 btn btn-primary btn-lg mt-2" type="submit">Изменить</button>
+</form>

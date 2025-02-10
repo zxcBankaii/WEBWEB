@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Главная";
+}
+
+@model List<User>
+
+<form asp-controller="Home" asp-action="Query1" method="post">
+    <h1 class="mt-5">Просмотр данных о клиентах по имени</h1>
+    <input type="text" name="name" class="form-control mt-2" placeholder="Имя" value="" required="">
+    <button class="w-100 btn btn-primary btn-lg mt-2" type="submit">Создать</button>
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Имя</th>
+            <th scope="col">Отчество</th>
+            <th scope="col">Email</th>
+            <th scope="col">Пароль</th>
+            <th scope="col">Адрес</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int count = 0;
+        }
+        @foreach (var item in Model)
+        {
+            count++;
+            <tr>
+                <th scope="row">@count</th>
+                <td>@item.FirstName</td>
+                <td>@item.LastName</td>
+                <td>@item.Email</td>
+                <td>@item.PasswordHash</td>
+                <td>@item.Address</td>
+            </tr>
+        }
+    </tbody>
+
+</table>

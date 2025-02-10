@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Главная";
+}
+
+@model List<OrderViewModel>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Id</th>
+            <th scope="col">Дата</th>
+            <th scope="col">Статус</th>
+            <th scope="col">Товары</th>
+            <th scope="col">Удалить</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int count = 0;
+        }
+        @foreach (var item in Model)
+        {
+            count++;
+            <tr>
+                <th scope="row">@count</th>
+                <td>@item.OrderId</td>
+                <td>@item.DateCreate</td>
+                <td>@item.Status</td>
+                <td>@foreach (var subItem in item.Products) { <p>@subItem.Name,</p> }</td>
+                <td><a asp-controller="Home" asp-action="RemoveOrder" asp-route-idOrder="@item.OrderId" type="button" class="btn btn-danger">Удалить</a></td>
+
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+
+
+<form asp-controller="Home" asp-action="CreateOrder" method="post">
+    <h1 class="mt-5">Создание нового заказа</h1>
+    <input type="date" name="dateTime" class="form-control mt-2" placeholder="Дата" value="" required="">
+    <input type="text" name="totalAmount" class="form-control mt-2" placeholder="Полная сумма" value="" required="">
+    <input type="text" name="status" class="form-control mt-2" placeholder="Статус" value="" required="">
+    <input type="text" name="idUser" class="form-control mt-2" placeholder="Id Клиента" value="" required="">
+    <button class="w-100 btn btn-primary btn-lg mt-2" type="submit">Создать</button>
+</form>

@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "Главная";
+}
+
+@model List<User>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Имя</th>
+            <th scope="col">Отчество</th>
+            <th scope="col">Email</th>
+            <th scope="col">Пароль</th>
+            <th scope="col">Адрес</th>
+            <th scope="col">Изменить</th>
+            <th scope="col">Удалить</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int count = 0;
+        }
+        @foreach (var item in Model)
+        {
+            count++;
+            <tr>
+                <th scope="row">@count</th>
+                <td>@item.FirstName</td>
+                <td>@item.LastName</td>
+                <td>@item.Email</td>
+                <td>@item.PasswordHash</td>
+                <td>@item.Address</td>
+                <td><a asp-controller="Home" asp-action="UpdateEmployee" asp-route-idUser="@item.Id" type="button" class="btn btn-warning">Изменить</a></td>
+                <td><a asp-controller="Home" asp-action="RemoveEmployee" asp-route-idUser="@item.Id" type="button" class="btn btn-danger">Удалить</a></td>
+
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+
+
+<form asp-controller="Home" asp-action="CreateEmployee" method="post">
+    <h1 class="mt-5">Создание нового клиента</h1>
+    <input type="text" name="firstName" class="form-control mt-2" placeholder="Имя" value="" required="">
+    <input type="text" name="lastName" class="form-control mt-2" placeholder="Отчество" value="" required="">
+    <input type="text" name="email" class="form-control mt-2" placeholder="Email" value="" required="">
+    <input type="text" name="password" class="form-control mt-2" placeholder="Пароль" value="" required="">
+    <input type="text" name="adress" class="form-control mt-2" placeholder="Адрес" value="" required="">
+    <button class="w-100 btn btn-primary btn-lg mt-2" type="submit">Создать</button>
+</form>

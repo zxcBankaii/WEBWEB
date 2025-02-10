@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Главная";
+}
+
+@model List<OrderViewModel>
+
+<form asp-controller="Home" asp-action="Query1" method="post">
+    <h1 class="mt-5">Просмотр данных о клиентах по имени</h1>
+    <input type="text" name="name" class="form-control mt-2" placeholder="Имя" value="" required="">
+    <button class="w-100 btn btn-primary btn-lg mt-2" type="submit">Создать</button>
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Id</th>
+            <th scope="col">Дата</th>
+            <th scope="col">Статус</th>
+            <th scope="col">Товары</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int count = 0;
+        }
+        @foreach (var item in Model)
+        {
+            count++;
+            <tr>
+                <th scope="row">@count</th>
+                <td>@item.OrderId</td>
+                <td>@item.DateCreate</td>
+                <td>@item.Status</td>
+                <td>@foreach (var subItem in item.Products)
+                    {
+                        <p>@subItem.Name,</p>
+                    }</td>
+
+            </tr>
+        }
+    </tbody>
+
+</table>
